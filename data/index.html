@@ -1,23 +1,83 @@
-<!--
-  Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp32-mpu-6050-web-server/
-
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files.
-  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
-
 <!DOCTYPE HTML><html>
 <head>
   <title>Golf-BAT Virtual Representation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.min.js"></script>
+  <style>
+    /* Light green theme */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #d9f9d6; /* Light green background */
+      color: #333;
+    }
+    .topnav {
+      background-color: #6cbe6d; /* Mild green for the top navigation bar */
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .topnav h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    .content {
+      padding: 20px;
+    }
+    .cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #6cbe6d;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 250px;
+    }
+    .card-title {
+      font-weight: bold;
+      color: #6cbe6d;
+    }
+    .reading {
+      font-size: 1.1rem;
+    }
+    .cube-content {
+      margin-top: 20px;
+    }
+    #3Dcube {
+      width: 100%;
+      height: 300px;
+      background-color: #ffffff;
+      border: 1px solid #6cbe6d;
+      border-radius: 8px;
+    }
+    #reset, #resetX, #resetY, #resetZ {
+      background-color: #6cbe6d;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #reset:hover, #resetX:hover, #resetY:hover, #resetZ:hover {
+      background-color: #5aa75a;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="topnav">
-    <h1><i class="far fa-compass"></i> MPU6050 <i class="far fa-compass"></i></h1>
+    <h1><i class="fas fa-golf-ball"></i> NAVAGOLF <i class="fas fa-golf-ball"></i></h1>
   </div>
   <div class="content">
     <div class="cards">
@@ -27,24 +87,15 @@
         <p><span class="reading">Y: <span id="gyroY"></span> rad</span></p>
         <p><span class="reading">Z: <span id="gyroZ"></span> rad</span></p>
       </div>
-      <div class="card">
-        <p class="card-title">ACCELEROMETER</p>
-        <p><span class="reading">X: <span id="accX"></span> ms<sup>2</sup></span></p>
-        <p><span class="reading">Y: <span id="accY"></span> ms<sup>2</sup></span></p>
-        <p><span class="reading">Z: <span id="accZ"></span> ms<sup>2</sup></span></p>
+      <div class="cube-content">
+        <div id="3Dcube"></div>
       </div>
-      <div class="card">
-        <p class="card-title">TEMPERATURE</p>
-        <p><span class="reading"><span id="temp"></span> &deg;C</span></p>
-        <p class="card-title">3D ANIMATION</p>
+      <div class="controls">
         <button id="reset" onclick="resetPosition(this)">RESET POSITION</button>
         <button id="resetX" onclick="resetPosition(this)">X</button>
         <button id="resetY" onclick="resetPosition(this)">Y</button>
         <button id="resetZ" onclick="resetPosition(this)">Z</button>
       </div>
-    </div>
-    <div class="cube-content">
-      <div id="3Dcube"></div>
     </div>
   </div>
 <script src="script.js"></script>
